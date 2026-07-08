@@ -125,121 +125,37 @@ if (consentNo) {
     scrollToPuzzle();
   });
 }
+// =========================================================
+// LOVE REVEAL
+// =========================================================
 
-// =========================================================
-// DRAGGABLE PUZZLE PIECE
-// =========================================================
-const puzzleBoard = document.getElementById("puzzleBoard");
-const puzzlePiece = document.getElementById("puzzlePiece");
-const puzzleSlot = document.getElementById("puzzleSlot");
-const puzzleHint = document.getElementById("puzzleHint");
+const revealBtn = document.getElementById("revealBtn");
+const loveImage = document.getElementById("loveImage");
 const puzzleSuccess = document.getElementById("puzzleSuccess");
-let puzzleSolved = false;
 
-function getSnapThreshold() {
-  return puzzleBoard.getBoundingClientRect().width * 0.18;
-}
+if (revealBtn) {
 
-function dragStart(e) {
-  if (puzzleSolved) return;
-  e.preventDefault();
-  const point = e.touches ? e.touches[0] : e;
-  const pieceRect = puzzlePiece.getBoundingClientRect();
-  const boardRect = puzzleBoard.getBoundingClientRect();
+    revealBtn.addEventListener("click", () => {
 
-  const offsetX = point.clientX - pieceRect.left;
-  const offsetY = point.clientY - pieceRect.top;
+        loveImage.classList.remove("blurred-photo");
+        loveImage.classList.add("revealed-photo");
 
-function move(ev) {
-  const p = ev.touches ? ev.touches[0] : ev;
+        revealBtn.style.display = "none";
 
-  let x = p.clientX - boardRect.left - offsetX;
-  let y = p.clientY - boardRect.top - offsetY;
+        launchConfetti();
 
-  const maxX = boardRect.width - pieceRect.width;
-  const maxY = boardRect.height - pieceRect.height;
+        puzzleSuccess.classList.add("show");
 
-  x = Math.max(0, Math.min(x, maxX));
-  y = Math.max(0, Math.min(y, maxY));
+        setTimeout(() => {
 
-  puzzlePiece.style.left = (x / boardRect.width) * 100 + "%";
-  puzzlePiece.style.top = (y / boardRect.height) * 100 + "%";
-  puzzlePiece.style.transform = "rotate(6deg)";
+            document.getElementById("timelineSection")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
 
-  const inner = puzzlePiece.querySelector(".piece-inner");
+        },2000);
 
-inner.style.backgroundPosition
-      inner.style.backgroundPosition =
-`${(-x/(boardRect.width-pieceRect.width))*100}% ${(-y/(boardRect.height-pieceRect.height))*100}%`;
-}
-
-  function up() {
-    document.removeEventListener("mousemove", move);
-    document.removeEventListener("mouseup", up);
-    document.removeEventListener("touchmove", move);
-    document.removeEventListener("touchend", up);
-    checkSnap();
-  }
-
-  document.addEventListener("mousemove", move);
-  document.addEventListener("mouseup", up);
-  document.addEventListener("touchmove", move, { passive: false });
-  document.addEventListener("touchend", up);
-}
-
-function checkSnap() {
-  const pieceRect = puzzlePiece.getBoundingClientRect();
-  const slotRect = puzzleSlot.getBoundingClientRect();
-  const dx = pieceRect.left - slotRect.left;
-  const dy = pieceRect.top - slotRect.top;
-  const dist = Math.sqrt(dx * dx + dy * dy);
-
-  if (dist < getSnapThreshold()) {
-    solvePuzzle();
-  }
-}
-
-function solvePuzzle() {
-  puzzleSolved = true;
-  puzzlePiece.classList.add("snapped");
-  puzzlePiece.style.left = "";
-  puzzlePiece.style.top = "";
-  puzzleHint.style.opacity = "0";
-  launchConfetti();
-  setTimeout(() => {
-    puzzleSuccess.classList.add("show");
-  }, 400);
-  setTimeout(() => {
-    document.getElementById("timelineSection").scrollIntoView({ behavior: "smooth" });
-  }, 2400);
-}
-
-function launchConfetti() {
-  const layer = document.getElementById("confettiHearts");
-  const symbols = ["❤", "💕", "✨", "💖"];
-  for (let i = 0; i < 24; i++) {
-    const piece = document.createElement("span");
-    piece.className = "confetti-piece";
-    piece.textContent = symbols[Math.floor(rand(0, symbols.length))];
-    piece.style.left = rand(0, 100) + "%";
-    piece.style.animationDelay = rand(0, 0.4) + "s";
-    piece.style.color = Math.random() > 0.5 ? "#b76e79" : "#c9a7eb";
-    layer.appendChild(piece);
-    setTimeout(() => piece.remove(), 2200);
-  }
-}
-
-if (puzzlePiece) {
-  puzzlePiece.addEventListener("mousedown", dragStart);
-  puzzlePiece.addEventListener("touchstart", dragStart, { passive: false });
-
-  // keyboard fallback for accessibility
-  puzzlePiece.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      solvePuzzle();
-    }
-  });
+    });
 }
 
 // =========================================================
