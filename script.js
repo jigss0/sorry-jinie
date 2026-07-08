@@ -150,14 +150,27 @@ function dragStart(e) {
   const offsetX = point.clientX - pieceRect.left;
   const offsetY = point.clientY - pieceRect.top;
 
-  function move(ev) {
-    const p = ev.touches ? ev.touches[0] : ev;
-    const x = p.clientX - boardRect.left - offsetX;
-    const y = p.clientY - boardRect.top - offsetY;
-    puzzlePiece.style.left = (x / boardRect.width) * 100 + "%";
-    puzzlePiece.style.top = (y / boardRect.height) * 100 + "%";
-    puzzlePiece.style.transform = "rotate(6deg)";
-  }
+function move(ev) {
+  const p = ev.touches ? ev.touches[0] : ev;
+
+  let x = p.clientX - boardRect.left - offsetX;
+  let y = p.clientY - boardRect.top - offsetY;
+
+  const maxX = boardRect.width - pieceRect.width;
+  const maxY = boardRect.height - pieceRect.height;
+
+  x = Math.max(0, Math.min(x, maxX));
+  y = Math.max(0, Math.min(y, maxY));
+
+  puzzlePiece.style.left = (x / boardRect.width) * 100 + "%";
+  puzzlePiece.style.top = (y / boardRect.height) * 100 + "%";
+  puzzlePiece.style.transform = "rotate(6deg)";
+
+  const inner = puzzlePiece.querySelector(".piece-inner");
+
+  inner.style.backgroundPosition =
+      `-${x}px -${y}px`;
+}
 
   function up() {
     document.removeEventListener("mousemove", move);
