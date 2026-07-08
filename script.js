@@ -168,7 +168,7 @@ function move(ev) {
 
   const inner = puzzlePiece.querySelector(".piece-inner");
 
-
+inner.style.backgroundPosition
       inner.style.backgroundPosition =
 `${(-x/(boardRect.width-pieceRect.width))*100}% ${(-y/(boardRect.height-pieceRect.height))*100}%`;
 }
