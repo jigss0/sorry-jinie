@@ -1051,3 +1051,49 @@ soft);
   .puzzle-board { width: 82vw; height: 82vw; }
   .piece-inner { width: 82vw; height: 82vw; background-size: 82vw 82vw; }
 }
+.love-photo{
+    position:relative;
+    width:min(90vw,420px);
+    margin:auto;
+}
+
+.love-photo img{
+    width:100%;
+    border-radius:25px;
+    display:block;
+    transition:.8s;
+}
+
+.blurred-photo{
+    filter:blur(12px) brightness(.7);
+}
+
+.revealed-photo{
+    filter:none;
+}
+
+.heart-button{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    border:none;
+    font-size:42px;
+    cursor:pointer;
+    background:white;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    animation:pulse 1.4s infinite;
+}
+
+@keyframes pulse{
+
+0%{transform:translate(-50%,-50%) scale(1);}
+
+50%{transform:translate(-50%,-50%) scale(1.12);}
+
+100%{transform:translate(-50%,-50%) scale(1);}
+
+}
