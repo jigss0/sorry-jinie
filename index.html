@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>To My Pretty Girl ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== LOADING SCREEN ===================== -->
+  <div id="loader" class="loader">
+    <div class="loader-heart">
+      <svg viewBox="0 0 32 29" class="heart-svg"><path d="M16 29S0 18.5 0 8.7C0 3.9 3.9 0 8.7 0c2.8 0 5.4 1.4 7.3 3.7C17.9 1.4 20.5 0 23.3 0 28.1 0 32 3.9 32 8.7 32 18.5 16 29 16 29z"/></svg>
+    </div>
+    <p class="loader-text">opening a little piece of my heart<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+  </div>
+
+  <!-- ===================== AMBIENT LAYERS ===================== -->
+  <div class="ambient-hearts" id="ambientHearts" aria-hidden="true"></div>
+  <div class="ambient-sparkles" id="ambientSparkles" aria-hidden="true"></div>
+
+  <audio id="bgMusic" loop preload="metadata">
+    <source src="music/our-song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ===================== MUSIC CONSENT MODAL ===================== -->
+  <div class="consent-overlay" id="consentOverlay" aria-hidden="true">
+    <div class="consent-modal glass" role="dialog" aria-modal="true" aria-labelledby="consentQuestion">
+      <p class="consent-icon">🎵</p>
+      <p class="consent-question" id="consentQuestion">Would you like to listen to our song while reading this?</p>
+      <div class="consent-buttons">
+        <button class="consent-btn consent-yes" id="consentYes">❤️ Yes, play our song</button>
+        <button class="consent-btn consent-no" id="consentNo">🤍 Maybe later</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== FLOATING MUSIC PLAYER ===================== -->
+  <div class="music-player glass collapsed" id="musicPlayer" aria-hidden="true">
+    <button class="player-collapse-btn" id="playerCollapseBtn" aria-label="Expand player">
+      <span class="chevron"></span>
+    </button>
+
+    <div class="player-vinyl" id="playerVinyl">
+      <div class="vinyl-disc">
+        <div class="vinyl-label"><span>❤</span></div>
+      </div>
+    </div>
+
+    <div class="player-main">
+      <div class="player-info-row">
+        <p class="player-caption">Our Song ❤️</p>
+        <div class="player-visualizer" id="playerVisualizer">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="player-progress-row">
+        <span class="player-time" id="playerCurrentTime">0:00</span>
+        <input type="range" id="playerProgress" class="player-progress" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+        <span class="player-time" id="playerDuration">0:00</span>
+      </div>
+
+      <div class="player-controls-row">
+        <button class="player-play-btn" id="playerPlayPause" aria-label="Play">
+          <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+
+        <div class="player-volume">
+          <svg viewBox="0 0 24 24" class="icon-volume"><path d="M3 10v4h4l5 5V5L7 10H3z"/></svg>
+          <input type="range" id="playerVolume" class="player-volume-slider" min="0" max="1" step="0.01" value="0.6" aria-label="Volume">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="mainContent">
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="section hero" id="hero">
+    <div class="hero-parallax" id="heroParallax" aria-hidden="true">
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+    </div>
+
+    <h1 class="hero-title">To My Pretty Girl <span class="heart-inline">❤️</span></h1>
+
+    <div class="name-carousel" id="nameCarousel" aria-live="polite">
+      <span class="name-word">My Love</span>
+      <span class="name-word">My Pretty</span>
+      <span class="name-word">My Princess</span>
+      <span class="name-word">My Baby</span>
+      <span class="name-word">My Pookie</span>
+      <span class="name-word">My Boo Boo</span>
+      <span class="name-word">My Kuchu Puchu</span>
+      <span class="name-word">My Favorite Human</span>
+      <span class="name-word">My Home</span>
+      <span class="name-word">My Everything</span>
+    </div>
+
+    <p class="hero-subline">I have something from my heart that I want you to see&hellip;</p>
+
+    <button class="glow-btn" id="openHeartBtn">
+      <span>Open My Heart</span>
+      <span class="btn-heart">❤</span>
+    </button>
+
+    <div class="scroll-hint" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- ===================== PUZZLE SECTION ===================== -->
+  <section class="section puzzle-section" id="puzzleSection">
+    <p class="eyebrow">put me back where i belong</p>
+    <h2 class="section-title">One Piece Was Missing</h2>
+    <p class="section-sub">Drag my face back beside you.</p>
+
+    <div class="puzzle-wrap" id="puzzleWrap">
+      <div class="puzzle-board" id="puzzleBoard">
+        <div class="puzzle-base" style="background-image:url('images/couple-full.jpg')"></div>
+        <div class="puzzle-slot" id="puzzleSlot"></div>
+        <div class="puzzle-piece" id="puzzlePiece" tabindex="0" role="button" aria-label="Drag to put the piece back in place">
+          <div class="piece-inner" style="background-image:url('images/couple-full.jpg')"></div>
+        </div>
+      </div>
+      <p class="puzzle-hint" id="puzzleHint">drag the piece into place</p>
+    </div>
+
+    <div class="puzzle-success" id="puzzleSuccess">
+      <div class="confetti-hearts" id="confettiHearts"></div>
+      <p class="success-text">Thank you for putting me back where I belong&hellip; beside you. ❤️</p>
+    </div>
+  </section>
+
+  <!-- ===================== MEMORY TIMELINE ===================== -->
+  <section class="section timeline-section" id="timelineSection">
+    <p class="eyebrow">our story so far</p>
+    <h2 class="section-title">A Few Moments I Keep</h2>
+
+    <div class="timeline">
+      <div class="timeline-line" aria-hidden="true"></div>
+
+      <article class="memory-card left">
+        <div class="memory-photo" style="background-image:url('images/memory1.jpg')"></div>
+        <div class="memory-body">
+          <span class="memory-date">the beginning</span>
+          <p class="memory-caption">You made ordinary days unforgettable.</p>
+        </div>
+      </article>
+
+      <article class="memory-card right">
+        <div class="memory-photo" style="background-image:url('images/memory2.jpg')"></div>
+        <div class="memory-body">
+          <span class="memory-date">somewhere far from home</span>
+          <p class="memory-caption">My safest place has always been beside you.</p>
+        </div>
+      </article>
+
+      <article class="memory-card left">
+        <div class="memory-photo" style="background-image:url('images/memory3.jpg')"></div>
+        <div class="memory-body">
+          <span class="memory-date">a very ordinary tuesday</span>
+          <p class="memory-caption">I never knew love could look this beautiful.</p>
+        </div>
+      </article>
+
+      <article class="memory-card right">
+        <div class="memory-photo" style="background-image:url('images/memory4.jpg')"></div>
+        <div class="memory-body">
+          <span class="memory-date">a quiet sunday</span>
+          <p class="memory-caption">You became my favorite chapter.</p>
+        </div>
+      </article>
+
+      <article class="memory-card left">
+        <div class="memory-photo" style="background-image:url('images/memory5.jpg')"></div>
+        <div class="memory-body">
+          <span class="memory-date">the dinner that ran too long</span>
+          <p class="memory-caption">I still smile every time I remember this moment.</p>
+        </div>
+      </article>
+
+      <article class="memory-card right">
+        <div class="memory-photo" style="background-image:url('images/memory6.jpg')"></div>
+        <div class="memory-body">
+          <span class="memory-date">right before you smiled</span>
+          <p class="memory-caption">I'd choose these memories again and again.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL LETTER ===================== -->
+  <section class="section letter-section" id="letterSection">
+    <div class="letter-glass">
+      <p class="eyebrow">the part I find hardest to say out loud</p>
+      <h2 class="letter-title">My Love&hellip; I'm Sorry <span class="heart-inline">❤️</span></h2>
+
+      <div class="letter-body">
+        <p>I know I don't always express my love in the best way. Sometimes my immaturity shows before my love does, and I hate knowing that I made you feel unheard or hurt.</p>
+
+        <p>You deserve patience, understanding and peace. I'm not writing this because I want the argument to disappear. I'm writing this because losing your smile hurts me more than being right ever could.</p>
+
+        <p>I promise to become someone who listens better. Someone who understands you better. Someone who protects your heart instead of hurting it. I'll make more effort to show my love through small everyday actions, not just big words.</p>
+
+        <p>I want to become the person who makes your life lighter, not heavier. Thank you for loving me despite my flaws. If you'll let me, I'll keep growing, learning, and loving you a little better every single day.</p>
+
+        <p class="letter-close">I love you.<br/>Always.</p>
+      </div>
+
+      <p class="letter-signature">Forever Yours <span class="heart-inline">❤️</span></p>
+    </div>
+  </section>
+
+  <!-- ===================== ENDING ===================== -->
+  <section class="section ending-section" id="endingSection">
+    <div class="ending-heart" id="endingHeart">
+      <svg viewBox="0 0 32 29" class="heart-svg big"><path d="M16 29S0 18.5 0 8.7C0 3.9 3.9 0 8.7 0c2.8 0 5.4 1.4 7.3 3.7C17.9 1.4 20.5 0 23.3 0 28.1 0 32 3.9 32 8.7 32 18.5 16 29 16 29z"/></svg>
+    </div>
+
+    <p class="ending-text">
+      I'll keep choosing you.<br/>
+      Every morning.<br/>
+      Every argument.<br/>
+      Every laugh.<br/>
+      Every difficult day.<br/>
+      Every beautiful day.<br/>
+      Again.<br/>
+      Again.<br/>
+      And again.
+    </p>
+
+    <button class="glow-btn" id="hugBtn">
+      <span>One More Hug</span>
+      <span class="btn-heart">❤</span>
+    </button>
+
+    <div class="hug-overlay" id="hugOverlay" aria-hidden="true">
+      <div class="hug-hearts" id="hugHearts"></div>
+      <p class="hug-text">I Love You.</p>
+      <button class="restart-btn" id="restartBtn">Begin again</button>
+    </div>
+  </section>
+
+  </main>
+
+<script src="script.js"></script>
+</body>
+</html>
