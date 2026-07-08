@@ -745,8 +745,8 @@ soft);
   position: absolute;
   width: 30%;
   height: 30%;
-  top: 8%;
-  left: 60%;
+  top: 6%;
+  left: 68%;
   border-radius: 14px;
   overflow: hidden;
   cursor: grab;
@@ -776,7 +776,7 @@ soft);
     background-repeat:no-repeat;
     background-size:333% 333%;
 
-    background-position:66% 32%;
+    background-position:44% 28%;
 }
 
 
